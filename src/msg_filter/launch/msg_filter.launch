@@ -1,0 +1,10 @@
+<launch>
+	<include file="$(find usb_cam)/launch/usb_cam.launch" />
+
+	
+	<node pkg="msg_filter" type="msg_filter_node" name="msg_filter"/>
+	
+	<node pkg="image_view" type="image_view" respawn="false" output="screen" name="image_view"/>
+	<remap from="image" to="/filtered/image_raw" />
+	
+</launch>
