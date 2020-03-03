@@ -18,18 +18,18 @@ public:
 
     //Topic you want to subscribe
     image_sub.subscribe(nh, "usb_cam/image_rect_color", 1);
- 		time_sub.subscribe(nh, "trigger", 1);
+    time_sub.subscribe(nh, "trigger/image", 1);
 
-		//Filter
-		//Synchronizer<MySyncPolicy> sync(MySyncPolicy(10), image_sub, time_sub);
-		//sync.registerCallback(boost::bind(&msg_filter::callback, this, _1, _2));
-		sync.reset(new Sync(MySyncPolicy(10), image_sub, time_sub));  
-		sync->registerCallback(boost::bind(&msg_filter::callback, this, _1, _2));
+    //Filter
+    //Synchronizer<MySyncPolicy> sync(MySyncPolicy(10), image_sub, time_sub);
+    //sync.registerCallback(boost::bind(&msg_filter::callback, this, _1, _2));
+    sync.reset(new Sync(MySyncPolicy(10), image_sub, time_sub));  
+    sync->registerCallback(boost::bind(&msg_filter::callback, this, _1, _2));
   }
 
   void callback(const ImageConstPtr& image, const TimeReferenceConstPtr& time)
   {
-  	ROS_INFO("in callback");
+    ROS_INFO("in callback");
     pub.publish(image);
   }
 
@@ -37,8 +37,8 @@ private:
   ros::NodeHandle nh; 
   ros::Publisher pub;
   Subscriber<Image> image_sub;
-	Subscriber<TimeReference> time_sub;
-	typedef sync_policies::ApproximateTime<Image, TimeReference> MySyncPolicy;
+  Subscriber<TimeReference> time_sub;
+  typedef sync_policies::ApproximateTime<Image, TimeReference> MySyncPolicy;
   typedef Synchronizer<MySyncPolicy> Sync;
   boost::shared_ptr<Sync> sync;
 };//End of class msg_filter

@@ -1,15 +1,15 @@
 image_width: 640
 image_height: 480
-camera_name: logitechc110
+camera_name: head_camera
 camera_matrix:
   rows: 3
   cols: 3
-  data: [679.85751, 0, 310.58676, 0, 679.529, 271.60267, 0, 0, 1]
+  data: [672.909847, 0, 297.162611, 0, 672.092391, 252.068234, 0, 0, 1]
 distortion_model: plumb_bob
 distortion_coefficients:
   rows: 1
   cols: 5
-  data: [0.248985, -0.6919729999999999, 0.002534, -0.002519, 0]
+  data: [0.231457, -0.605536, 0.002326, -0.000719, 0]
 rectification_matrix:
   rows: 3
   cols: 3
@@ -17,4 +17,4 @@ rectification_matrix:
 projection_matrix:
   rows: 3
   cols: 4
-  data: [692.61684, 0, 309.11171, 0, 0, 693.43887, 272.6571, 0, 0, 0, 1, 0]
+  data: [686.0133059999999, 0, 295.968139, 0, 0, 685.617249, 252.239065, 0, 0, 0, 1, 0]
