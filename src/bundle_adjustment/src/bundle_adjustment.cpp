@@ -20,6 +20,7 @@ public:
   {
     triangulation::Pose output;
     //.... do something with the input and generate the output...
+    
     pub.publish(output);
   }
 
