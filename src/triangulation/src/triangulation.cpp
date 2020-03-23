@@ -1,7 +1,6 @@
 #include <ros/ros.h>
 #include <std_msgs/Header.h>
 #include <tf/transform_listener.h>
-#include "geometry_msgs/TransformStamped.h"
 #include <sensor_msgs/TimeReference.h>
 #include <openpose_ros_msgs/BoundingBox.h>
 #include <openpose_ros_msgs/OpenPoseHuman.h>
@@ -51,17 +50,19 @@ void callback(const openpose_ros_msgs::OpenPoseHumanListConstPtr& second)
     now = ros::Time::now();
 
     //get pose
-    geometry_msgs::TransformStamped transform_now;
-    geometry_msgs::TransformStamped transform_past;
+    tf::StampedTransform transform_now;
+    tf::StampedTransform transform_past;
 
     try{
-      listener.lookupTransform("/end effector frame", "/static frame",  
-                               now, transform_now);
+      listener.lookupTransform("end_effector_frame", "static_frame", now, transform_now);
+      listener.lookupTransform("end_effector_frame", "static_frame", past, transform_past);
+    }
+    catch (tf::TransformException ex){
+      ROS_ERROR("%s",ex.what());
+      ros::Duration(1.0).sleep();
+    }
 
-      listener.lookupTransform("/end effector frame", "/static frame",  
-                               past, transform_past);
-  
-    float camera_distance = abs(transform_now.transform.translation.x-transform_past.transform.translation.x);
+    float camera_distance = abs(transform_now.getOrigin().getX()-transform_past.getOrigin().getX());
 
     //fill message
     triangulation::Pose msg;
@@ -78,11 +79,7 @@ void callback(const openpose_ros_msgs::OpenPoseHumanListConstPtr& second)
       }
     //publish
     pub_pose.publish(msg);
-    }
-    catch (tf::TransformException ex){
-      ROS_ERROR("%s",ex.what());
-      ros::Duration(1.0).sleep();
-    }
+
   }
 }
 

@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.1)
 project(triangulation_cv)
-
+SET(OpenCV_DIR ~/OpenC-master/installation/OpenCV-master/lib/cmake/opencv4)
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
 
@@ -123,7 +123,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
 # include
-  ${OpenCV_LIBRARIES}
+  ${OpenCV_DIR}
   ${catkin_INCLUDE_DIRS}
 )
 
