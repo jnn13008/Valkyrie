@@ -13,9 +13,9 @@
 	<node name="image_proc" pkg="image_proc" type="image_proc" ns="usb_cam"/>
 
 	
-	<!--node pkg="msg_filter" type="msg_filter_node" name="msg_filter"/>
+	<node pkg="msg_filter" type="msg_filter_node" name="msg_filter" />
 	
-	<node pkg="image_view" type="image_view" respawn="false" output="screen" name="image_view"/-->
-	<!--remap from="image" to="/filtered/image_raw" /-->
+	<node pkg="image_view" type="image_view" respawn="false" output="screen" name="image_view" />
+	<remap from="image" to="/usb_cam/image_rect" />
 	
 </launch>
