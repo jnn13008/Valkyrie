@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>triangulation</name>
+  <name>valkyrie</name>
   <version>0.0.0</version>
-  <description>The triangulation package</description>
+  <description>The valkyrie package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="depe@student.mdh.se">depe</maintainer>
+  <maintainer email="nvidia@todo.todo">nvidia</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
@@ -19,7 +19,7 @@
   <!-- Url tags are optional, but multiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-  <!-- <url type="website">http://wiki.ros.org/triangulation</url> -->
+  <!-- <url type="website">http://wiki.ros.org/valkyrie</url> -->
 
 
   <!-- Author tags are optional, multiple are allowed, one per tag -->
@@ -50,19 +50,14 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roscpp</build_depend>
-  <build_depend>geometry_msgs</build_depend>
-  <build_depend>tf</build_depend>
-  <build_depend>openpose_ros_msgs</build_depend>
-  <build_depend>message_generation</build_depend>
-  <build_depend>message_runtime</build_depend>
-  <!--build_export_depend>roscpp</build_export_depend -->
-  <!--build_export_depend>geometry_msgs</build_export_depend -->
-  <!--build_export_depend>tf</build_export_depend -->
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
   <exec_depend>roscpp</exec_depend>
-  <exec_depend>openpose_ros_msgs</exec_depend>
-  <exec_depend>message_generation</exec_depend>
-  <exec_depend>message_runtime</exec_depend>
-  <exec_depend>tf</exec_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->

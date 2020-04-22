@@ -3,12 +3,12 @@
 #include <tf/transform_listener.h>
 #include "geometry_msgs/TransformStamped.h"
 #include <sensor_msgs/TimeReference.h>
+#include <triangulation/PointWithProb.h>
+#include <triangulation/Pose.h>
 #include <openpose_ros_msgs/BoundingBox.h>
 #include <openpose_ros_msgs/OpenPoseHuman.h>
 #include <openpose_ros_msgs/OpenPoseHumanList.h>
 #include <openpose_ros_msgs/PointWithProb.h>
-#include <triangulation/PointWithProb.h>
-#include <triangulation/Pose.h>
 #include <opencv2/calib3d.hpp>
 #include <opencv2/core/mat.hpp> //4.1
 #include <opencv2/core/persistence.hpp>// 4.1
@@ -73,7 +73,7 @@ void callback(const openpose_ros_msgs::OpenPoseHumanListConstPtr& second)
 
     float camera_translation_x = abs(transform_now.getOrigin().getX()-transform_past.getOrigin().getX());
     float camera_translation_y = abs(transform_now.getOrigin().getY()-transform_past.getOrigin().getY());
-    
+
     //fill projection matrix
     Mat projection_matrix_translation;
     projection_matrix.copyTo(projection_matrix_translation);
@@ -92,20 +92,20 @@ void callback(const openpose_ros_msgs::OpenPoseHumanListConstPtr& second)
     }
     //create outpput array for triangulation
     Mat triangulation_result = Mat_<float>::zeros(4, 25);
-    
+
     //triangulate
     triangulatePoints(projection_matrix, projection_matrix_translation, points_perspective_one, points_perspective_two, triangulation_result);
 
     //fill message
     triangulation::Pose msg;
-    msg.header.stamp = now; 
+    msg.header.stamp = now;
 
     for(int i = 0; i < 25; i++) {
       msg.body_key_points_with_prob[i].x = triangulation_result.at<float>(0,i);
       msg.body_key_points_with_prob[i].y = triangulation_result.at<float>(1,i);
       msg.body_key_points_with_prob[i].z = triangulation_result.at<float>(2,i);
       // probability? triangulation_result[3,i]
-    }  
+    }
 
     //publish
     pub_pose.publish(msg);
@@ -114,7 +114,7 @@ void callback(const openpose_ros_msgs::OpenPoseHumanListConstPtr& second)
 }
 
 private:
-  ros::NodeHandle nh; 
+  ros::NodeHandle nh;
   ros::Publisher pub_pose, pub_move;
   ros::Subscriber sub_pose;
   tf::TransformListener listener;
@@ -123,8 +123,8 @@ private:
   int first_msg;
   //FileStorage fs("logitechc110.yml", FileStorage::READ);
   Mat projection_matrix;
- 
-  
+
+
 };//End of class msg_filter
 
 int main(int argc, char **argv)

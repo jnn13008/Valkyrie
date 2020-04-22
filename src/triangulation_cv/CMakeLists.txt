@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.1)
 project(triangulation_cv)
 SET(OpenCV_DIR ~/OpenC-master/installation/OpenCV-master/lib/cmake/opencv4)
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -12,12 +12,17 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   cmake_modules
   message_generation
+  openpose_ros_msgs
+  openpose_ros
 )
 find_package(OpenCV REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
+#set(OPENPOSE_DIR ~/valkyrie_ws/src/openpose_ros)
+#set(OPENPOSE_INCLUDE_DIRS ${OPENPOSE_DIR}/include)
+#set(OPENPOSE_LINK_LIBRARY ${OPENPOSE_DIR}/build/lib/libopenpose.so)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -53,6 +58,7 @@ find_package(OpenCV REQUIRED)
    FILES
    Pose.msg
    PointWithProb.msg
+
  )
 
 ## Generate services in the 'srv' folder
@@ -76,8 +82,10 @@ find_package(OpenCV REQUIRED)
    sensor_msgs
    std_msgs
    openpose_ros_msgs
-   
  )
+
+
+
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -123,8 +131,11 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
 # include
-  ${OpenCV_DIR}
-  ${catkin_INCLUDE_DIRS}
+    ${OpenCV_DIR}
+    ${catkin_INCLUDE_DIRS}
+    ${OPENPOSE_LINK_LIBRARY}
+    ${GFLAGS_LIBRARY}
+    ${GLOG_LIBRARY}
 )
 
 ## Declare a C++ library
