@@ -9,7 +9,7 @@ OpenPoseROSIO::OpenPoseROSIO(OpenPose &openPose): nh_("/openpose_ros_node"), it_
     std::string output_topic;
     std::string input_image_transport_type;
 
-    nh_.param("image_topic", image_topic, std::string("/camera/image_raw"));
+    nh_.param("image_topic", image_topic, std::string("filtered/Image_rect_color"));
     nh_.param("input_image_transport_type", input_image_transport_type, std::string("raw"));
     nh_.param("output_topic", output_topic, std::string("/openpose_ros/human_list"));
     nh_.param("display_output", display_output_flag_, true);

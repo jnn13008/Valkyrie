@@ -26,7 +26,7 @@ public:
     pub_move = nh.advertise<sensor_msgs::TimeReference>("trigger/StereoMovement", 1);
 
     //Topic you want to subscribe
-    sub_pose = nh.subscribe("openpose/human", 1, &triangulation_class::callback, this);
+    sub_pose = nh.subscribe("/openpose_ros/human_list", 1, &triangulation_class::callback, this);
     first_msg = 0;
     FileStorage fs("logitechc110.yml", FileStorage::READ);
     fs.open("logitechc110.yml", FileStorage::READ);

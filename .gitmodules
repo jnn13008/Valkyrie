@@ -5,3 +5,7 @@
 	path = src/universal_robot
 	url = https://github.com/ros-industrial/universal_robot.git
 	branch = melodic-devel
+[submodule "src/vision_opencv"]
+	path = src/vision_opencv
+	url = https://github.com/ros-perception/vision_opencv.git
+	branch = melodic
