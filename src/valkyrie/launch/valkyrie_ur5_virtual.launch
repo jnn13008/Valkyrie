@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+roslaunch ur_gazebo ur5.launch limited:=true
+roslaunch ur5_moveit_config ur5_moveit_planning_execution.launch sim:=true limited:=true
+roslaunch ur5_moveit_config moveit_rviz.launch config:=true
+-->
+<!-- ~/valkyrie_ws/src/universal_robot/ur5_moveit_config/launch/move_group.launch -->
+<!-- ~/valkyrie_ws/src/universal_robot/ur5_moveit_config/launch/ -->
+<launch>
+    <include file="$(find ur_gazebo)/launch/ur5.launch"  >
+        <param name="limited" value="true" />
+    </include>
+
+    <include file="$(find ur5_moveit_config)/launch/ur5_moveit_planning_execution.launch"  >
+        <param name="sim" value="true" />
+        <param name="limited" value="true" />
+    </include>
+
+    <include file="$(find ur5_moveit_config)/launch/moveit_rviz.launch"  >
+        <param name="sim" value="true" />
+        <param name="limited" value="true" />
+    </include>
+</launch>

@@ -9,3 +9,6 @@
 	path = src/vision_opencv
 	url = https://github.com/ros-perception/vision_opencv.git
 	branch = melodic
+[submodule "src/timed_roslaunch"]
+	path = src/timed_roslaunch
+	url = https://github.com/MoriKen254/timed_roslaunch.git
