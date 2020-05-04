@@ -51,7 +51,8 @@ class robot(state):
 
         rospy.loginfo("Scene created")
         try:
-            self._move_group = moveit_commander.MoveGroupCommander(self._robot_name)
+            # self._move_group = moveit_commander.MoveGroupCommander(self._robot_name)
+            self._move_group = moveit_commander.MoveGroupCommander("arm")
             #self._move_group.set_planner_id("PRMkConfigDefault")
             self._move_group.set_planner_id("RRT")
         except RuntimeError as e:
