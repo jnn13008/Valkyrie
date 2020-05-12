@@ -1,39 +1,3 @@
-#include <ros/ros.h>
-#include <std_msgs/Header.h>
-#include <tf/transform_listener.h>
-#include "geometry_msgs/TransformStamped.h"
-#include <sensor_msgs/TimeReference.h>
-#include <triangulation/PointWithProb.h>
-#include <triangulation/Pose.h>
-#include <openpose_ros_msgs/BoundingBox.h>
-#include <openpose_ros_msgs/OpenPoseHuman.h>
-#include <openpose_ros_msgs/OpenPoseHumanList.h>
-#include <openpose_ros_msgs/PointWithProb.h>
-#include <opencv2/calib3d.hpp>
-#include <opencv2/core/mat.hpp> //4.1
-#include <opencv2/core/persistence.hpp>// 4.1
-#include "opencv2/opencv.hpp"
-
-using namespace cv;
-
-class triangulation_class
-{
-public:
-  triangulation_class()
-  {
-    //Topic you want to publish
-    pub_pose = nh.advertise<triangulation::Pose>("three_d_pose", 1);
-    pub_move = nh.advertise<sensor_msgs::TimeReference>("trigger/StereoMovement", 1);
-
-    //Topic you want to subscribe
-    sub_pose = nh.subscribe("/filtered/Image_rect_color", 1, &triangulation_class::callback, this);
-    first_msg = 0;
-    FileStorage fs("logitechc110.yml", FileStorage::READ);
-    fs.open("logitechc110.yml", FileStorage::READ);
-    fs["projection_matrix"] >> projection_matrix;
-    fs.release();
-  }
-
 void callback(const openpose_ros_msgs::OpenPoseHumanListConstPtr& second)
 {
   if (first_msg == 0){

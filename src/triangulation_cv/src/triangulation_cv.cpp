@@ -3,13 +3,13 @@
 #include <tf/transform_listener.h>
 #include "geometry_msgs/TransformStamped.h"
 #include <sensor_msgs/TimeReference.h>
-#include <triangulation/PointWithProb.h>
-#include <triangulation/Pose.h>
 #include <openpose_ros_msgs/BoundingBox.h>
 #include <openpose_ros_msgs/OpenPoseHuman.h>
 #include <openpose_ros_msgs/OpenPoseHumanList.h>
 #include <openpose_ros_msgs/PointWithProb.h>
 #include <opencv2/calib3d.hpp>
+#include <triangulation_cv/PointWithProb.h>
+#include <triangulation_cv/Pose.h>
 #include <opencv2/core/mat.hpp> //4.1
 #include <opencv2/core/persistence.hpp>// 4.1
 #include "opencv2/opencv.hpp"
@@ -22,7 +22,7 @@ public:
   triangulation_class()
   {
     //Topic you want to publish
-    pub_pose = nh.advertise<triangulation::Pose>("three_d_pose", 1);
+    pub_pose = nh.advertise<triangulation_cv::Pose>("three_d_pose", 1);
     pub_move = nh.advertise<sensor_msgs::TimeReference>("trigger/StereoMovement", 1);
 
     //Topic you want to subscribe
@@ -55,7 +55,7 @@ void callback(const openpose_ros_msgs::OpenPoseHumanListConstPtr& second)
     pub_move.publish(time);
   }
   else {
-    triangulation::Pose pose;
+    triangulation_cv::Pose pose;
     now = ros::Time::now();
 
     //get pose
@@ -97,7 +97,7 @@ void callback(const openpose_ros_msgs::OpenPoseHumanListConstPtr& second)
     triangulatePoints(projection_matrix, projection_matrix_translation, points_perspective_one, points_perspective_two, triangulation_result);
 
     //fill message
-    triangulation::Pose msg;
+    triangulation_cv::Pose msg;
     msg.header.stamp = now;
 
     for(int i = 0; i < 25; i++) {

@@ -1,0 +1,6 @@
+eff_step: 100
+jump_th: 0.0
+wp_scale: 1.0
+reference_frame: "/base_link"
+goal_position_tolerance: 0.01
+goal_orientation_tolerance: 0.1

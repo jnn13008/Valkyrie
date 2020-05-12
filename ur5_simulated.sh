@@ -13,6 +13,9 @@ sleep 3
 roslaunch ur5_moveit_config moveit_rviz.launch config:=true &
 rviz_pid=$!
 sleep 20
+rqt_graph &
+rqt_grap_pid=$?
+sleep 10
 echo "Simulation is running"
 running="run"
 while [[ ! $running == "exit" ]]; do
@@ -20,9 +23,11 @@ while [[ ! $running == "exit" ]]; do
     read running
 done
 echo "Simulation is closing"
-kill $rviz_pid &
-kill $moveit_pid &
+kill $rviz_pid
+kill $moveit_pid
+kill $rqt_grap_pid
 kill --signal 15 $gazebo_pid &
+killall gazebo-2
 echo "waiting"
 wait
 # kill $roscore_pid

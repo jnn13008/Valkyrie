@@ -1,0 +1,9 @@
+<launch>
+    <!-- Add <arg ...>'s -->
+    <!-- Add <param >'s -->
+    <!-- Add <node >'s -->
+    <group ns="valkyrie">
+        <rosparam file="$(find valkyrie)/conifg/valkyrie.yaml" />
+    </group>
+    /* <node name="valkyrie" pkg="valkyrie" type="valkyrie_robot.py"  /> */
+</launch>

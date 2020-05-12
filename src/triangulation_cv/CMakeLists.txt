@@ -11,9 +11,9 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   tf
   cmake_modules
-  message_generation
   openpose_ros_msgs
   openpose_ros
+  message_generation
 )
 find_package(OpenCV REQUIRED)
 
@@ -54,6 +54,7 @@ find_package(OpenCV REQUIRED)
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 # Generate messages in the 'msg' folder
+
  add_message_files(
    FILES
    Pose.msg
@@ -78,11 +79,12 @@ find_package(OpenCV REQUIRED)
 ## Generate added messages and services with any dependencies listed here
  generate_messages(
    DEPENDENCIES
+   std_msgs
    geometry_msgs
    sensor_msgs
-   std_msgs
    openpose_ros_msgs
  )
+
 
 
 

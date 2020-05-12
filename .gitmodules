@@ -12,3 +12,6 @@
 [submodule "src/timed_roslaunch"]
 	path = src/timed_roslaunch
 	url = https://github.com/MoriKen254/timed_roslaunch.git
+[submodule "src/easy_handeye"]
+	path = src/easy_handeye
+	url = https://github.com/IFL-CAMP/easy_handeye.git
